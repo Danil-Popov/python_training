@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
-import unittest, time, re
+import unittest
 
 from contact import Contact
 
@@ -21,6 +21,7 @@ class TestAddContact(unittest.TestCase):
     def login(self, username, password):
         # login
         wd = self.wd
+        self.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
@@ -51,9 +52,8 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("email").clear()
         wd.find_element_by_name("email").send_keys(contact.email)
         # creation contact
-
         wd.find_element_by_xpath("//input[20]").click()
-
+        self.return_to_contacts()
 
     def return_to_contacts(self):
         wd = self.wd
@@ -65,17 +65,15 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_link_text("Logout").click()
 
     def test_add_contact(self):
-        self.open_home_page()
+
         self.login(username = "admin", password = "secret")
         self.create_contact(Contact(first_name = "danil",last_name = "popov", city= "ryazan city", number_phone = "89997778866", email = "frost@yandex.ru"))
-        self.return_to_contacts()
+
         self.logout()
 
     def test_add_empty_contact(self):
-        self.open_home_page()
         self.login(username = "admin", password = "secret")
         self.create_contact(Contact(first_name = "",last_name = "", city= "", number_phone = "", email = ""))
-        self.return_to_contacts()
         self.logout()
 
     def is_element_present(self, how, what):
