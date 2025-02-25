@@ -1,6 +1,7 @@
 _author_ = 'Danil'
 from selenium import webdriver
 
+
 class Application:
 
     def __init__(self):

@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+
 import pytest
 from contact import Contact
 from application import Application
 
+#Translated the test to Paytest
 @pytest.fixture
 def app(request):
     fixture = Application()
