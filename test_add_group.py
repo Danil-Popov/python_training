@@ -3,7 +3,7 @@ import pytest
 from group import Group
 from application import Application
 
-
+#Translated the test to Paytest
 @pytest.fixture
 def app(request):
     fixture = Application()
